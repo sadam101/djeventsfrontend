@@ -1,7 +1,8 @@
+import Layout from '../../components/Layout';
 export default function AddEventPage() {
   return (
-    <div>
+    <Layout>
       <h1>Add events</h1>
-    </div>
+    </Layout>
   );
 }
