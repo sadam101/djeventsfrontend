@@ -1,13 +1,20 @@
+import Link from 'next/link';
 import Layout from '@/components/Layout';
 import { API_URL } from '@/config/index';
+import EventItem from '@/components/EventItem';
 export default function HomePage({ events }) {
   return (
     <Layout>
-      <h1>Next.JS Mastering Dev to Development Course</h1>
-      <p>Traversy Media</p>
+      <h1>Upcomming Events</h1>
+      {events.length === 0 && <h3>No events to show</h3>}
       {events.map((evt) => (
-        <h1 key={evt.slug}>{evt.name}</h1>
+        <EventItem key={evt.id} evt={evt} />
       ))}
+      {events.length > 0 && (
+        <Link href="/events">
+          <a className="btn-secondary">View all Events</a>
+        </Link>
+      )}
     </Layout>
   );
 }
@@ -17,7 +24,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      events,
+      events: events.slice(0, 3),
     },
     revalidate: 1,
   };
